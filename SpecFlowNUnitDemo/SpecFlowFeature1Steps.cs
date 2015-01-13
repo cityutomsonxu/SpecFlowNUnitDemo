@@ -1,6 +1,8 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 namespace SpecFlowNUnitDemo
 {
     [Binding]
@@ -21,7 +23,17 @@ namespace SpecFlowNUnitDemo
         [Then(@"the result should be (.*) on the screen")]
         public void ThenTheResultShouldBeOnTheScreen(int p0)
         {
-            Assert.AreEqual(1, 1);  
+            IWebDriver driver = new FirefoxDriver();
+            driver.Navigate().GoToUrl("http://www.bing.com/");
+            IWebElement searchInput = driver.FindElement(By.Id("sb_form_q"));
+            searchInput.SendKeys("Hello World");
+
+            string searchKeyWord = driver.FindElement(By.Id("sb_form_q")).GetAttribute("value");
+
+            //close browser
+            driver.Close();
+
+            Assert.AreEqual("Hello World1", searchKeyWord);
         }
     }
 }
