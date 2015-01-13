@@ -33,7 +33,7 @@ namespace SpecFlowNUnitDemo
             //close browser
             driver.Close();
 
-            Assert.AreEqual("Hello World1", searchKeyWord);
+            Assert.AreEqual("Hello World", searchKeyWord);
         }
     }
 }
